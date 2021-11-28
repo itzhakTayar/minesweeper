@@ -34,6 +34,7 @@ function initGame() {
   gSave = 3;
   lives();
   resetSaveBtn();
+  resetBtnTxt('restart😀');
 }
 
 function createBoard() {
@@ -75,7 +76,7 @@ function renderBoard(board) {
     strHTML += '</tr>\n';
   }
   //   catch the table body from the dom
-  var elBoard = document.querySelector('.board');
+  var elBoard = document.querySelector('tbody');
 
   //   update the board on the dom
   elBoard.innerHTML = strHTML;
@@ -169,12 +170,12 @@ function endGame() {
 }
 
 function resetBtnTxt(value) {
-  var elResetBtn = document.querySelector('.reset');
+  var elResetBtn = document.querySelector('.restartBtn');
   elResetBtn.innerText = value;
 }
 function reset() {
   removeModal();
-  resetBtnTxt('😀');
+
   gGame.shownCount = 0;
   clearInterval(gIntervalID);
   resetTimer();
@@ -374,6 +375,12 @@ function isCellClick() {
 }
 
 function resetSaveBtn() {
-  var elBtn = document.querySelector('.save');
+  var elBtn = document.querySelector('.saveBtn');
   elBtn.innerText = `save(${gSave})`;
+}
+
+function getMinesNumFromUser() {
+  var elInput = document.querySelector('input').value;
+  var value = elInput - gLevel.MINES;
+  setMins(value);
 }
